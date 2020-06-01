@@ -19,7 +19,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     private Context context;
     private ArrayList<Menu> menus;
 
-    public MenuAdapter(Context mcontext, ArrayList<Menu> menuCafe){
+    public MenuAdapter(Context mcontext,ArrayList<Menu> menuCafe){
         context=mcontext;
         menus=menuCafe;
     }
@@ -33,24 +33,36 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MenuAdapter.MenuViewHolder holder, int position) {
+        Menu menuBaru=menus.get (position);
+        String gambarBaru=menuBaru.getGambar ();
+        String harga=menuBaru.getHarga ();
+        String nama=menuBaru.getNama ();
 
-    }
+        holder.tvNamaData.setText (nama);
+        holder.tvHargaData.setText (harga);
 
+        Glide
+                .with (context)
+                .load(gambarBaru)
+                .centerCrop ()
+                .into (holder.imData);
     }
 
     @Override
     public int getItemCount() {
-        return menus.size ();
+        return menus.size();
     }
+
     public class MenuViewHolder extends RecyclerView.ViewHolder{
         public ImageView imData;
         public TextView tvHargaData, tvNamaData;
 
         public MenuViewHolder(@NonNull View itemView) {
-            super (itemView);
+            super(itemView);
             imData=itemView.findViewById (R.id.img_menu);
             tvHargaData=itemView.findViewById (R.id.tv_harga);
             tvNamaData=itemView.findViewById (R.id.tv_nama);
-        }
+
         }
     }
+}
